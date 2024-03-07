@@ -6,6 +6,9 @@
 
 WSInfer-MIL is a command line tool to run pre-trained MIL models on whole slide images. It is the slide-level companion to [WSInfer](https://wsinfer.readthedocs.io/en/latest/), which provides patch-level classification.
 
+> [!CAUTION]
+> WSInfer-MIL is intended _only_ for research purposes.
+
 # Install
 
 WSInfer-MIL can be installed using `pip`. WSInfer-MIL will install PyTorch automatically
@@ -39,6 +42,9 @@ pip install wsinfer-mil
 ```
 
 # Examples
+
+> [!CAUTION]
+> These models are intended _only_ for research purposes.
 
 ## With a model online
 
