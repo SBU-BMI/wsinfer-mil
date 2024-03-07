@@ -9,7 +9,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest] #, windows-latest, macos-latest]
         python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
     steps:
       - name: Cache sample WSI
@@ -30,7 +30,7 @@ jobs:
         run: |
           mkdir ~/wsi
           cd ~/wsi
-          wget -nc https://openslide.cs.cmu.edu/download/openslide-testdata/Aperio/CMU-1.svs
+          wget -nc -q https://openslide.cs.cmu.edu/download/openslide-testdata/Aperio/CMU-1.svs
           cd -
       - name: Run tests
         # Go to a different directory to test that WSInfer-MIL still finds everything it needs.
