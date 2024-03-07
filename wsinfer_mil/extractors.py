@@ -1,4 +1,7 @@
+from __future__ import annotations
+
 import abc
+import logging
 from functools import cached_property
 
 import huggingface_hub
@@ -8,6 +11,8 @@ import torch
 from torch.utils.data import DataLoader
 from torchvision import transforms
 from tqdm import tqdm
+
+logger = logging.getLogger(__name__)
 
 
 class PatchFeatureExtractor(abc.ABC):
@@ -20,13 +25,11 @@ class PatchFeatureExtractor(abc.ABC):
         raise a `RuntimeError` if a GPU is not available.
     """
 
-    def __init__(self, *, allow_cpu: bool = False) -> None:
-        self.allow_cpu = allow_cpu
-        if not self.allow_cpu and not torch.cuda.is_available():
-            raise RuntimeError(
-                "CUDA not available. Please ensure PyTorch can use a GPU."
-            )
+    def __init__(self) -> None:
+        if not torch.cuda.is_available():
+            logger.warn("GPU is not available! Falling back to (much much slower) CPU")
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        logger.debug(f"PyTorch device: {self.device}")
 
     @abc.abstractmethod
     def load_model(self) -> torch.nn.Module:
