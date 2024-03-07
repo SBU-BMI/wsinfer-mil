@@ -82,8 +82,8 @@ docs = [
 ]
 
 [project.urls]
-Repository = "https://github.com/kaczmarj/wsinfer-mil"
-"Bug Tracker" = "https://github.com/kaczmarj/wsinfer-mil/issues"
+Repository = "https://github.com/SBU-BMI/wsinfer-mil"
+"Bug Tracker" = "https://github.com/SBU-BMI/wsinfer-mil/issues"
 
 [project.scripts]
 wsinfer-mil = "wsinfer_mil.cli:cli"
