@@ -38,6 +38,7 @@ jobs:
         # Go to a different directory to test that WSInfer-MIL still finds everything it needs.
         # Test it twice so the second time we get cache hits.
         run: |
-          cd /tmp
+          mkdir -p ~/foobar
+          cd ~/foobar
           wsinfer-mil run -m kaczmarj/pancancer-tissue-classifier.tcga -i ~/wsi/CMU-1.svs
           wsinfer-mil run -m kaczmarj/pancancer-tissue-classifier.tcga -i ~/wsi/CMU-1.svs
