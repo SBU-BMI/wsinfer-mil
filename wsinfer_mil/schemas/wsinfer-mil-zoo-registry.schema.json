@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Schema for WSInfer Model Zoo registry file (wsinfer-zoo-registry.json)",
+  "type": "object",
+  "properties": {
+    "models": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "hf_repo_id": {
+            "type": "string"
+          },
+          "hf_revision": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "abmil"
+            ]
+          }
+        },
+        "required": [
+          "description",
+          "hf_repo_id",
+          "hf_revision",
+          "type"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "models"
+  ],
+  "additionalProperties": false
+}

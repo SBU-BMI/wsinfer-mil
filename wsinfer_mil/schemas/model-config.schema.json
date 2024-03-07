@@ -1,0 +1,48 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "properties": {
+        "spec_version": {
+            "type": "string",
+            "description": "Version of the specification used (eg '1.0')"
+        },
+        "num_classes": {
+            "type": "integer",
+            "description": "The number of classes the model outputs",
+            "minimum": 1
+        },
+        "class_names": {
+            "type": "array",
+            "description": "The names of the classes the model outputs. Length must be equal to 'num_classes'.",
+            "items": {
+                "type": "string"
+            },
+            "uniqueItems": true
+        },
+        "feature_extractor": {
+            "type": "string",
+            "description": "The feature extractor to use with this model."
+        },
+        "patch_size_um": {
+            "type": "number",
+            "description": "The size of the patch in micrometers (eg 128)",
+            "minimum": 1
+        },
+        "type": {
+            "type": "string",
+            "description": "The type of MIL method used.",
+            "enum": [
+                "abmil",
+                "clam",
+                "porpoise"
+            ]
+        }
+    },
+    "required": [
+        "spec_version",
+        "num_classes",
+        "class_names",
+        "feature_extractor",
+        "patch_size_um"
+    ]
+}

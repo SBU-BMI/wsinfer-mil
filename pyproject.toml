@@ -1,0 +1,132 @@
+[build-system]
+requires = ["setuptools>=45", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wsinfer-mil"
+description = "Run specimen-level inference on whole slide images."
+readme = "README.md"
+requires-python = ">= 3.8"
+license = { text = "Apache License, Version 2.0" }
+authors = [
+    { name = "Jakub Kaczmarzyk", email = "jakub.kaczmarzyk@stonybrookmedicine.edu" },
+]
+maintainers = [
+    { name = "Jakub Kaczmarzyk", email = "jakub.kaczmarzyk@stonybrookmedicine.edu" },
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Healthcare Industry",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Image Recognition",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+]
+dependencies = [
+    "click>=8.0,<9,!=8.1.4,!=8.1.5",
+    "h5py",
+    "huggingface_hub",
+    # This is when numpy.typing.NDArray was introduced.
+    "numpy>=1.21.0",
+    "opencv-python-headless>=4.0.0",
+    "pillow",
+    "platformdirs",
+    "scikit-image>=0.20.0",
+    "shapely",
+    "tabulate",
+    # https://github.com/Bayer-Group/tiffslide/issues/72#issuecomment-1631015274
+    "tifffile>=2023.1.23",
+    "tiffslide>=2.2.0",
+    # https://github.com/Bayer-Group/tiffslide/issues/72#issuecomment-1630091390
+    "imagecodecs >= 2022.7.27 ; python_version<'3.9'",
+    # https://github.com/Bayer-Group/tiffslide/issues/72#issuecomment-1630091390
+    "imagecodecs >= 2023.7.10 ; python_version>='3.9'",
+    # The installation of torch and torchvision can differ by hardware. Users are
+    # advised to install torch and torchvision for their given hardware and then install
+    # wsinfer-mil. See https://pytorch.org/get-started/locally/.
+    "torch>=1.7",
+    "torchvision",
+    "tqdm",
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+dev = [
+    "geojson",
+    "jsonschema",
+    "mypy",
+    "pre-commit",
+    "pytest",
+    "ruff",
+    "types-Pillow",
+    "types-tabulate",
+    "types-tqdm",
+]
+docs = [
+    "pydata-sphinx-theme",
+    "sphinx",
+    "sphinx-autoapi",
+    "sphinx-click",
+    "sphinx-copybutton",
+]
+
+[project.urls]
+Repository = "https://github.com/kaczmarj/wsinfer-mil"
+"Bug Tracker" = "https://github.com/kaczmarj/wsinfer-mil/issues"
+
+[project.scripts]
+wsinfer-mil = "wsinfer_mil.cli:cli"
+
+[tool.setuptools.package-data]
+wsinfer_mil = ["py.typed", "schemas/*.json"]
+
+[tool.setuptools.packages.find]
+include = ["wsinfer_mil*"]
+
+[tool.mypy]
+disallow_untyped_defs = true
+disallow_any_unimported = false
+no_implicit_optional = true
+check_untyped_defs = true
+warn_return_any = true
+warn_unused_ignores = true
+show_error_codes = true
+
+[[tool.mypy.overrides]]
+module = [
+    "h5py",
+    "cv2",
+    "geojson",
+    "huggingface_hub",
+    "torchvision.*",
+    "scipy.stats",
+    "shapely.*",
+    "skimage.morphology",
+    "tifffile",
+    "zarr.storage",
+]
+ignore_missing_imports = true
+
+[tool.setuptools_scm]
+write_to = "wsinfer_mil/_version.py"
+
+[tool.ruff]
+extend-exclude = ["_version.py"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "B", "I"]
+unfixable = ["B"]
+
+[tool.ruff.lint.isort]
+force-single-line = true
