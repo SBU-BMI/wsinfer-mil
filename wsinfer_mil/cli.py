@@ -1,5 +1,7 @@
 """Command line interface for WSInfer MIL."""
 
+from __future__ import annotations
+
 import logging
 import os
 from pathlib import Path
@@ -80,9 +82,10 @@ def cli() -> None:
 @click.option(
     "-j",
     "--num-workers",
-    help="Number of workers to use during patch feature extraction",
-    type=click.IntRange(min=0, max=os.cpu_count()),
-    default=4,
+    help="Number of workers to use during patch feature extraction. -1 (default) uses"
+    " all cores.",
+    type=click.IntRange(min=-1, max=os.cpu_count()),
+    default=-1,
     show_default=True,
 )
 @click.option(
@@ -104,6 +107,8 @@ def run(
     json: bool,
 ) -> None:
     model = load_torchscript_model_from_hf(hf_repo_id, hf_repo_revision)
+    if num_workers == -1:
+        num_workers = os.cpu_count() or 0
     _run_impl(
         wsi_path=wsi_path,
         model=model,

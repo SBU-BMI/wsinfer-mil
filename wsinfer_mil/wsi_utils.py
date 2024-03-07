@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import tiffslide
 from tiffslide.tiffslide import PROPERTY_NAME_MPP_X
 from tiffslide.tiffslide import PROPERTY_NAME_MPP_Y
