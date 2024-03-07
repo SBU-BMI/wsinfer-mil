@@ -12,6 +12,7 @@ jobs:
         python-version: ["3.10"]
     steps:
       - name: Cache sample WSI
+        id: cache-wsi
         uses: actions/cache@v3
         with:
           path: ~/wsi/
@@ -27,10 +28,11 @@ jobs:
           python -m pip install torch torchvision --extra-index-url https://download.pytorch.org/whl/cpu
           python -m pip install .
       - name: Download sample WSI
+        if: steps.cache-wsi.outputs.cache-hit != 'true'
         run: |
           mkdir -p ~/wsi
           cd ~/wsi
-          wget -nc -q https://openslide.cs.cmu.edu/download/openslide-testdata/Aperio/CMU-1.svs
+          Invoke-WebRequest -URI https://openslide.cs.cmu.edu/download/openslide-testdata/Aperio/CMU-1.svs -OutFile CMU-1.svs
           cd -
       - name: Run tests
         # Go to a different directory to test that WSInfer-MIL still finds everything it needs.
