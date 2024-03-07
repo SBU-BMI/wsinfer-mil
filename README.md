@@ -1,5 +1,9 @@
 # WSInfer Multiple Instance Learning (MIL)
 
+[![Continuous Integration](https://github.com/SBU-BMI/wsinfer-mil/actions/workflows/cli-test.yml/badge.svg)](https://github.com/SBU-BMI/wsinfer-mil/actions/workflows/cli-test.yml)
+[![Version on PyPI](https://img.shields.io/pypi/v/wsinfer-mil.svg)](https://pypi.org/project/wsinfer-mil/)
+[![Supported Python versions](https://img.shields.io/pypi/pyversions/wsinfer-mil)](https://pypi.org/project/wsinfer-mil/)
+
 WSInfer-MIL is a command line tool to run pre-trained MIL models on whole slide images. It is the slide-level companion to [WSInfer](https://wsinfer.readthedocs.io/en/latest/), which provides patch-level classification.
 
 # Install
