@@ -29,7 +29,7 @@ jobs:
           python -m pip install .
       - name: Download sample WSI
         run: |
-          mkdir ~/wsi
+          mkdir -p ~/wsi
           cd ~/wsi
           wget -nc -q https://openslide.cs.cmu.edu/download/openslide-testdata/Aperio/CMU-1.svs
           cd -
