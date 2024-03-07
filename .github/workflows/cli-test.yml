@@ -1,4 +1,4 @@
-name: Test CLI
+name: Linux
 on:
   push:
     branches: [ main ]
