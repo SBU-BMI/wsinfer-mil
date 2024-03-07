@@ -1,5 +1,7 @@
 """Errors for WSInfer MIL."""
 
+from __future__ import annotations
+
 
 class WSInferMILException(Exception):
     """Base exception for WSInfer MIL."""
