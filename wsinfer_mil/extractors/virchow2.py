@@ -10,10 +10,10 @@ from torchvision.transforms import Compose
 from .base import PatchFeatureExtractor
 
 
-class UNI(PatchFeatureExtractor):
+class Virchow2(PatchFeatureExtractor):
     @property
     def name(self) -> str:
-        return "UNI"
+        return "Virchow2"
 
     def load_model(self) -> torch.nn.Module:
         model = timm.create_model(
