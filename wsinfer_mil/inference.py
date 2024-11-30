@@ -129,7 +129,7 @@ def infer_one_slide(
             num_workers=num_workers,
             worker_init_fn=dataset.worker_init,
         )
-        embedding = extractor.get_embeddings(loader)
+        embedding = extractor.run(loader)
         cache.set_embedding(extractor, embedding)
 
     model_jit = torch.jit.load(model.model_path, map_location="cpu")
