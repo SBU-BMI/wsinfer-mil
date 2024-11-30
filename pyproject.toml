@@ -44,6 +44,7 @@ dependencies = [
     "pillow",
     "platformdirs",
     "scikit-image>=0.20.0",
+    "timm",
     "shapely",
     "tabulate",
     # https://github.com/Bayer-Group/tiffslide/issues/72#issuecomment-1631015274
