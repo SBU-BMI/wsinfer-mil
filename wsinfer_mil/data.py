@@ -60,7 +60,7 @@ class WSIPatches(Dataset):
         self.slide = TiffSlide(self.wsi_path)
 
     def __len__(self) -> int:
-        return self.patch_coordindates.shape[0]
+        return len(self.patch_coordindates)
 
     def __getitem__(self, idx: int) -> torch.Tensor:
         coords: Sequence[int] = self.patch_coordindates[idx]
