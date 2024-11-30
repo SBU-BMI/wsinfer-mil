@@ -115,6 +115,8 @@ module = [
     "shapely.*",
     "skimage.morphology",
     "tifffile",
+    "timm",
+    "timm.*",
     "zarr.storage",
 ]
 ignore_missing_imports = true
