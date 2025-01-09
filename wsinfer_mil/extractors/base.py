@@ -15,12 +15,17 @@ logger = logging.getLogger(__name__)
 
 
 def _find_fastest_device() -> str:
-    if torch.backends.mps.is_available() and torch.backends.mps.is_built():
+    if (
+        hasattr(torch.backends, "mps")
+        and torch.backends.mps.is_available()
+        and torch.backends.mps.is_built()
+    ):
         return "mps"
-    elif torch.cuda.is_available():
-        return "cuda:0"
-    else:
-        return "cpu"
+
+    if torch.cuda.is_available():
+        return f"cuda:{torch.cuda.current_device()}"
+
+    return "cpu"
 
 
 class PatchFeatureExtractor(abc.ABC):
