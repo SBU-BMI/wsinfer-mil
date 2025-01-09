@@ -50,6 +50,7 @@ def infer_one_slide(
     model: Model,
     tissue_mask: Image.Image | None,
     num_workers: int = 0,
+    quantize: bool = False,
 ) -> ModelInferenceOutput:
     """Run MIL inference on one slide.
 
@@ -118,7 +119,11 @@ def infer_one_slide(
             num_workers=num_workers,
             worker_init_fn=dataset.worker_init,
         )
-        embedding = extractor.run(loader)
+        if quantize:
+            with torch.autocast(device_type="cuda", dtype=torch.float16):
+                embedding = extractor.run(loader)
+        else:
+            embedding = extractor.run(loader)
         embeddings_cache.save(embedding)
 
     model_jit = torch.jit.load(model.model_path, map_location="cpu")
