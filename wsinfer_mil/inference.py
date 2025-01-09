@@ -126,6 +126,7 @@ def infer_one_slide(
         raise TypeError(
             f"expected loaded model to be torch.nn.Module but got {type(model_jit)}"
         )
+    model_jit.eval()
 
     # This may have to be modified for different weakly-supervised methods.
     logits, softmax_probs, attention = get_model_outputs(model_jit, embedding)
