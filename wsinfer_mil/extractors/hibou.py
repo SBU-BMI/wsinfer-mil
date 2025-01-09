@@ -1,3 +1,5 @@
+import numpy as np
+import numpy.typing as npt
 import torch
 from torchvision import transforms
 from transformers import AutoImageProcessor
@@ -28,3 +30,7 @@ class HibouL(PatchFeatureExtractor):
         return lambda image: processor(images=image, return_tensors="pt")[
             "pixel_values"
         ].squeeze(0)
+
+    def get_batch_embeddings(self, batch: torch.Tensor) -> npt.NDArray[np.float32]:
+        output = self.model(pixel_values=batch).pooler_output
+        return output.detach().cpu().numpy().squeeze()  # type: ignore
