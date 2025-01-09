@@ -21,7 +21,7 @@ import torch
 from PIL import Image
 from torch.utils.data import DataLoader
 
-from wsinfer_mil.cache import Cache
+from wsinfer_mil.cache import EmbeddingsCache
 from wsinfer_mil.client.localmodel import Model
 from wsinfer_mil.data import WSIPatches
 from wsinfer_mil.extractors import get_extractor_by_name
@@ -59,32 +59,19 @@ def infer_one_slide(
 
     tslide = tiffslide.TiffSlide(slide_path)
 
-    slide_quickhash = quickhash(tslide)
-
-    cache = Cache(
-        slide_path=slide_path,
-        slide_quickhash=slide_quickhash,
-        patch_size_um=model.config.patch_size_um,
-    )
-
     # Segment tissue.
     if tissue_mask is None:
-        tissue_mask = cache.get_tissue_mask()
-        if tissue_mask is None:
-            tissue_mask_arr = segment_tissue(
-                tslide=tslide,
-                thumbsize=(2048, 2048),
-                median_filter_size=7,
-                binary_threshold=7,
-                closing_kernel_size=6,
-                min_object_size_um2=200**2,
-                min_hole_size_um2=190**2,
-            )
-            tissue_mask = Image.fromarray(tissue_mask_arr).convert("1")
-            cache.set_tissue_mask(tissue_mask)
-    else:
-        tissue_mask = tissue_mask.convert("1")
-        cache.set_tissue_mask(tissue_mask)
+        tissue_mask_arr = segment_tissue(
+            tslide=tslide,
+            thumbsize=(2048, 2048),
+            median_filter_size=7,
+            binary_threshold=7,
+            closing_kernel_size=6,
+            min_object_size_um2=200**2,
+            min_hole_size_um2=190**2,
+        )
+        tissue_mask = Image.fromarray(tissue_mask_arr).convert("1")
+    tissue_mask = tissue_mask.convert("1")
 
     tissue_mask_aspect = tissue_mask.size[0] / tissue_mask.size[1]
     slide_aspect = tslide.dimensions[0] / tslide.dimensions[1]
@@ -94,24 +81,26 @@ def infer_one_slide(
             f" {slide_aspect}, {tissue_mask_aspect}"
         )
 
-    # Get patch coordinates.
-    # Nx4 coords (minx, miny, width, height)
-    coords = cache.get_patch_coordinates()
-    if coords is None:
-        binary_tissue_mask = np.asarray(tissue_mask) > 0
-        coords = patch_tissue(
-            tslide,
-            binary_tissue_mask=binary_tissue_mask,
-            patch_size_um=model.config.patch_size_um,
-        )
-        cache.set_patch_coordinates(
-            patch_coordinates=coords, patch_size_um=model.config.patch_size_um
-        )
+    binary_tissue_mask = np.asarray(tissue_mask) > 0
+    coords = patch_tissue(
+        tslide,
+        binary_tissue_mask=binary_tissue_mask,
+        patch_size_um=model.config.patch_size_um,
+    )
 
-    # Run through feature extractor.
     extractor_contructor = get_extractor_by_name(model.config.feature_extractor)
     extractor = extractor_contructor()
-    embedding = cache.get_embedding(extractor)
+
+    slide_quickhash = quickhash(tslide)
+    embeddings_cache = EmbeddingsCache(
+        slide_path=slide_path,
+        slide_quickhash=slide_quickhash,
+        tissue_mask=tissue_mask,
+        patch_coordinates=coords,
+        embedding_model_name=extractor.name,
+    )
+
+    embedding = embeddings_cache.load()
     if embedding is None:
         dataset = WSIPatches(
             wsi_path=slide_path,
@@ -130,13 +119,15 @@ def infer_one_slide(
             worker_init_fn=dataset.worker_init,
         )
         embedding = extractor.run(loader)
-        cache.set_embedding(extractor, embedding)
+        embeddings_cache.save(embedding)
 
     model_jit = torch.jit.load(model.model_path, map_location="cpu")
     if not isinstance(model_jit, torch.nn.Module):
         raise TypeError(
             f"expected loaded model to be torch.nn.Module but got {type(model_jit)}"
         )
+
+    # This may have to be modified for different weakly-supervised methods.
     logits, softmax_probs, attention = get_model_outputs(model_jit, embedding)
     output = ModelInferenceOutput(
         logits=logits,
