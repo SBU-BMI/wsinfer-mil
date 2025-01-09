@@ -21,10 +21,9 @@ class KaikoL(PatchFeatureExtractor):
     def transform(self) -> transforms.Compose:
         return transforms.Compose(
             [
-                transforms.ToImage(),
                 transforms.Resize(size=224),
                 transforms.CenterCrop(size=224),
-                transforms.ToDtype(torch.float32, scale=True),
+                transforms.ToTensor(),
                 transforms.Normalize(
                     mean=(0.5, 0.5, 0.5),
                     std=(0.5, 0.5, 0.5),
