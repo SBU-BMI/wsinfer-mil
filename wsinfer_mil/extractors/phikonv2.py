@@ -1,9 +1,9 @@
+import numpy as np
+import numpy.typing as npt
 import torch
 from torchvision.transforms import Compose
 from transformers import AutoImageProcessor
 from transformers import AutoModel
-import numpy.typing as npt
-import numpy as np
 
 from .base import PatchFeatureExtractor
 
