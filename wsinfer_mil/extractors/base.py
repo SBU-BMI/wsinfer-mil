@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import abc
 import logging
+import os
 from functools import cached_property
 
 import numpy as np
@@ -15,14 +16,15 @@ logger = logging.getLogger(__name__)
 
 
 def _find_fastest_device() -> str:
-    if (
+    if os.getenv("SPINPATH_FORCE_CPU", "false").lower() in ("true", "1", "t"):
+        return "cpu"
+    elif (
         hasattr(torch.backends, "mps")
         and torch.backends.mps.is_available()
         and torch.backends.mps.is_built()
     ):
         return "mps"
-
-    if torch.cuda.is_available():
+    elif torch.cuda.is_available():
         return f"cuda:{torch.cuda.current_device()}"
 
     return "cpu"
