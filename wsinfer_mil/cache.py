@@ -13,7 +13,7 @@ import numpy as np
 import numpy.typing as npt
 from PIL import Image
 
-from wsinfer_mil.defaults import WSINFER_MIL_CACHE_DIR
+from spinpath.defaults import SPINPATH_CACHE_DIR
 
 logger = logging.getLogger(__name__)
 
@@ -47,7 +47,7 @@ class EmbeddingsCache:
         self.slide_quickhash = slide_quickhash
         # self.patch_size_um = patch_size_um
         if cache_dir is None:
-            self.cache_dir = WSINFER_MIL_CACHE_DIR
+            self.cache_dir = SPINPATH_CACHE_DIR
         else:
             self.cache_dir = Path(cache_dir)
 

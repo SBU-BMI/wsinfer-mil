@@ -21,14 +21,14 @@ import torch
 from PIL import Image
 from torch.utils.data import DataLoader
 
-from wsinfer_mil.cache import EmbeddingsCache
-from wsinfer_mil.client.localmodel import Model
-from wsinfer_mil.data import WSIPatches
-from wsinfer_mil.extractors import get_extractor_by_name
-from wsinfer_mil.output_container import ModelInferenceOutput
-from wsinfer_mil.patchlib.patch import patch_tissue
-from wsinfer_mil.patchlib.segment import segment_tissue
-from wsinfer_mil.quickhash import quickhash
+from spinpath.cache import EmbeddingsCache
+from spinpath.client.localmodel import Model
+from spinpath.data import WSIPatches
+from spinpath.extractors import get_extractor_by_name
+from spinpath.output_container import ModelInferenceOutput
+from spinpath.patchlib.patch import patch_tissue
+from spinpath.patchlib.segment import segment_tissue
+from spinpath.quickhash import quickhash
 
 logger = logging.getLogger(__name__)
 

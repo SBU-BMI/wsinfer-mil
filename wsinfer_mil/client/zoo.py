@@ -9,10 +9,10 @@ from pathlib import Path
 import jsonschema
 from huggingface_hub import hf_hub_download
 
-from wsinfer_mil.client.hfmodel import HFModel
-from wsinfer_mil.client.hfmodel import load_torchscript_model_from_hf
-from wsinfer_mil.defaults import WSINFER_MIL_REGISTRY_PATH
-from wsinfer_mil.errors import InvalidRegistryConfiguration
+from spinpath.client.hfmodel import HFModel
+from spinpath.client.hfmodel import load_torchscript_model_from_hf
+from spinpath.defaults import SPINPATH_REGISTRY_PATH
+from spinpath.errors import InvalidRegistryConfiguration
 
 logger = logging.getLogger(__name__)
 
@@ -101,12 +101,12 @@ def load_registry(registry_file: str | Path | None = None) -> ModelRegistry:
             filename="wsinfer-mil-zoo-registry.json",
             revision="main",
             repo_type="dataset",
-            local_dir=WSINFER_MIL_REGISTRY_PATH.parent,
+            local_dir=SPINPATH_REGISTRY_PATH.parent,
         )
-        if not Path(WSINFER_MIL_REGISTRY_PATH).exists():
+        if not Path(SPINPATH_REGISTRY_PATH).exists():
             raise FileNotFoundError(
                 "Expected registry to be saved to"
-                f" {WSINFER_MIL_REGISTRY_PATH} but was saved instead to {path}"
+                f" {SPINPATH_REGISTRY_PATH} but was saved instead to {path}"
             )
     else:
         if not Path(registry_file).exists():

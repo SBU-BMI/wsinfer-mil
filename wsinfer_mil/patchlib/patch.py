@@ -18,7 +18,7 @@ from shapely import Point
 from shapely import Polygon
 from shapely import STRtree
 
-from wsinfer_mil.wsi_utils import get_avg_mpp
+from spinpath.wsi_utils import get_avg_mpp
 
 logger = logging.getLogger(__name__)
 

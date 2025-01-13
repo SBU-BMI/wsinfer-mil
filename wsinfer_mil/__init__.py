@@ -7,9 +7,9 @@ try:
 except ImportError:
     __version__ = "0.0.unknown"
 
-from wsinfer_mil.client.hfmodel import load_torchscript_model_from_hf
-from wsinfer_mil.client.localmodel import load_torchscript_model_from_filesystem
-from wsinfer_mil.inference import infer_one_slide
+from spinpath.client.hfmodel import load_torchscript_model_from_hf
+from spinpath.client.localmodel import load_torchscript_model_from_filesystem
+from spinpath.inference import infer_one_slide
 
 __all__ = [
     "infer_one_slide",
