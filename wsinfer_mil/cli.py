@@ -155,6 +155,7 @@ def run(
 @click.option(
     "--json", is_flag=True, help="Print the model outputs (and attention) as JSON"
 )
+@click.option("--quantize", is_flag=True, help="Quantize embedding model to float16")
 def runlocal(
     *,
     model_path: Path,
@@ -164,6 +165,7 @@ def runlocal(
     num_workers: int,
     table_format: str,
     json: bool,
+    quantize: bool,
 ) -> None:
     model = load_torchscript_model_from_filesystem(model_path, model_config_path)
     _run_impl(
@@ -173,4 +175,5 @@ def runlocal(
         num_workers=num_workers,
         tablefmt=table_format,
         json=json,
+        quantize=quantize,
     )
