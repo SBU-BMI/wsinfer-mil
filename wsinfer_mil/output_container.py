@@ -26,8 +26,7 @@ class _NumpyEncoder(json.JSONEncoder):
 
 
 class SupportsWrite(Protocol):
-    def write(self, data: str) -> None:
-        ...
+    def write(self, data: str) -> None: ...
 
 
 @dataclasses.dataclass
@@ -39,12 +38,10 @@ class ModelInferenceOutput:
     patch_coordinates: npt.NDArray[np.int_]
 
     @overload
-    def to_json(self, fp: None = None) -> str:
-        ...
+    def to_json(self, fp: None = None) -> str: ...
 
     @overload
-    def to_json(self, fp: SupportsWrite) -> None:
-        ...
+    def to_json(self, fp: SupportsWrite) -> None: ...
 
     def to_json(self, fp: SupportsWrite | None = None) -> str | None:
         d = dataclasses.asdict(self)
@@ -63,14 +60,14 @@ class ModelInferenceOutput:
             )
         if self.softmax_probs.ndim == 2:
             if self.softmax_probs.shape[0] == 1:
-                probs = self.softmax_probs.squeeze(0).tolist()
+                probs = self.softmax_probs.squeeze(0).tolist()  # type: ignore
             else:
                 raise ValueError(
                     "In the case of 2-dim softmax probabiltiies, expected first axis to"
                     f" have length 1 but got {self.softmax_probs.shape[0]}"
                 )
         else:
-            probs = self.softmax_probs.tolist()
+            probs = self.softmax_probs.tolist()  # type: ignore
 
         if len(probs) != len(self.class_names):
             raise ValueError(

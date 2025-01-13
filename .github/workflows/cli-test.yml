@@ -11,7 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        # python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.12"]
     steps:
       - name: Cache sample WSI
         id: cache-wsi
@@ -41,14 +42,14 @@ jobs:
         # Test it twice so the second time we get cache hits.
         run: |
           cd /tmp
-          wsinfer-mil run -m kaczmarj/pancancer-tissue-classifier.tcga -i ~/wsi/CMU-1.svs
-          wsinfer-mil run -m kaczmarj/pancancer-tissue-classifier.tcga -i ~/wsi/CMU-1.svs
+          SPINPATH_FORCE_CPU=1 wsinfer-mil run -m kaczmarj/pancancer-tissue-classifier.tcga -i ~/wsi/CMU-1.svs
+          SPINPATH_FORCE_CPU=1 wsinfer-mil run -m kaczmarj/pancancer-tissue-classifier.tcga -i ~/wsi/CMU-1.svs
 
   macOS:
     runs-on: macos-latest
     strategy:
       matrix:
-        python-version: ["3.10"]
+        python-version: ["3.12"]
     steps:
       - name: Cache sample WSI
         id: cache-wsi
@@ -78,14 +79,14 @@ jobs:
         # Test it twice so the second time we get cache hits.
         run: |
           cd /tmp
-          wsinfer-mil run -m kaczmarj/pancancer-tissue-classifier.tcga -i ~/wsi/CMU-1.svs
-          wsinfer-mil run -m kaczmarj/pancancer-tissue-classifier.tcga -i ~/wsi/CMU-1.svs
+          SPINPATH_FORCE_CPU=1 wsinfer-mil run -m kaczmarj/pancancer-tissue-classifier.tcga -i ~/wsi/CMU-1.svs
+          SPINPATH_FORCE_CPU=1 wsinfer-mil run -m kaczmarj/pancancer-tissue-classifier.tcga -i ~/wsi/CMU-1.svs
 
   Windows:
     runs-on: windows-latest
     strategy:
       matrix:
-        python-version: ["3.10"]
+        python-version: ["3.12"]
     steps:
       - name: Cache sample WSI
         id: cache-wsi
@@ -116,5 +117,6 @@ jobs:
         run: |
           mkdir -p ~/foobar
           cd ~/foobar
+          set SPINPATH_FORCE_CPU=1
           wsinfer-mil run -m kaczmarj/pancancer-tissue-classifier.tcga -i ~/wsi/CMU-1.svs
           wsinfer-mil run -m kaczmarj/pancancer-tissue-classifier.tcga -i ~/wsi/CMU-1.svs

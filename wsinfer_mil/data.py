@@ -47,20 +47,20 @@ class WSIPatches(Dataset):
         if not Path(wsi_path).exists():
             raise FileNotFoundError(f"WSI path not found: {wsi_path}")
 
-        assert (
-            self.patch_coordindates.ndim == 2
-        ), "expected 2D array of patch coordinates"
+        assert self.patch_coordindates.ndim == 2, (
+            "expected 2D array of patch coordinates"
+        )
         # x, y, width, height
-        assert (
-            self.patch_coordindates.shape[1] == 4
-        ), "expected second dimension to have len 4"
+        assert self.patch_coordindates.shape[1] == 4, (
+            "expected second dimension to have len 4"
+        )
 
     def worker_init(self, worker_id: int | None = None) -> None:
         del worker_id
         self.slide = TiffSlide(self.wsi_path)
 
     def __len__(self) -> int:
-        return self.patch_coordindates.shape[0]
+        return len(self.patch_coordindates)
 
     def __getitem__(self, idx: int) -> torch.Tensor:
         coords: Sequence[int] = self.patch_coordindates[idx]
