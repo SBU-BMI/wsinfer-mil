@@ -33,4 +33,4 @@ class HibouL(PatchFeatureExtractor):
 
     def get_batch_embeddings(self, batch: torch.Tensor) -> npt.NDArray[np.float32]:
         output = self.model(pixel_values=batch).pooler_output
-        return output.detach().cpu().numpy().squeeze()  # type: ignore
+        return output.detach().cpu().numpy()  # type: ignore

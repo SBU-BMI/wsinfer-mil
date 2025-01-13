@@ -28,4 +28,4 @@ class PhikonV2(PatchFeatureExtractor):
 
     def get_batch_embeddings(self, batch: torch.Tensor) -> npt.NDArray[np.float32]:
         output = self.model(batch)
-        return output.last_hidden_state[:, 0, :].detach().cpu().numpy().squeeze()  # type: ignore
+        return output.last_hidden_state[:, 0, :].detach().cpu().numpy()  # type: ignore
