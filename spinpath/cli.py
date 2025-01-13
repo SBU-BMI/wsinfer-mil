@@ -1,4 +1,4 @@
-"""Command line interface for WSInfer MIL."""
+"""Command line interface for SpinPath."""
 
 from __future__ import annotations
 

@@ -4,11 +4,11 @@ from pathlib import Path
 
 from platformdirs import user_cache_dir
 
-# Where we keep all files related to WSInfer MIL.
-SPINPATH_DIR = Path(user_cache_dir(appname="wsinfer-mil"))
+# Where we keep all files related to SpinPath.
+SPINPATH_DIR = Path(user_cache_dir(appname="spinpath"))
 
-# Cache for tissue masks, patch coordinates, and feature embeddings.
+# Cache for feature embeddings.
 SPINPATH_CACHE_DIR = SPINPATH_DIR / "cache"
 
-# JSON file with list of registered WSInfer MIL models.
+# JSON file with list of registered SpinPath models.
 SPINPATH_REGISTRY_PATH = SPINPATH_DIR / "registry.json"

@@ -1,4 +1,4 @@
-"""WSInfer MIL is a toolkit for specimen-level inference on whole slide images."""
+"""SpinPath is a toolkit for specimen-level inference on whole slide images."""
 
 from __future__ import annotations
 

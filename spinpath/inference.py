@@ -1,4 +1,4 @@
-"""Main interface to WSInfer MIL.
+"""Main interface to SpinPath.
 
 1. Read slide.
 2. Check cache for tissue segmentation.

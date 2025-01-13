@@ -1,4 +1,4 @@
-"""API to interact with WSInfer MIL models on HuggingFace Hub."""
+"""API to interact with SpinPath models on HuggingFace Hub."""
 
 from __future__ import annotations
 

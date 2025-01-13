@@ -1,15 +1,15 @@
-"""Errors for WSInfer MIL."""
+"""Errors for SpinPath."""
 
 from __future__ import annotations
 
 
-class WSInferMILException(Exception):
-    """Base exception for WSInfer MIL."""
+class SpinPathException(Exception):
+    """Base exception for SpinPath."""
 
 
-class InvalidModelConfiguration(WSInferMILException):
+class InvalidModelConfiguration(SpinPathException):
     """Invalid model configuration."""
 
 
-class InvalidRegistryConfiguration(WSInferMILException):
+class InvalidRegistryConfiguration(SpinPathException):
     """Invalid model zoo registry configuration."""

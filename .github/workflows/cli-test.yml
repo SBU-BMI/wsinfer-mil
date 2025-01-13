@@ -25,7 +25,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install WSInfer-CLI
+      - name: Install SpinPath CLI
         run: |
           python -m pip install --upgrade pip setuptools wheel
           python -m pip install torch torchvision --extra-index-url https://download.pytorch.org/whl/cpu
@@ -38,7 +38,7 @@ jobs:
           wget -nc -q https://openslide.cs.cmu.edu/download/openslide-testdata/Aperio/CMU-1.svs
           cd -
       - name: Run tests
-        # Go to a different directory to test that WSInfer-MIL still finds everything it needs.
+        # Go to a different directory to test that SpinPath still finds everything it needs.
         # Test it twice so the second time we get cache hits.
         run: |
           cd /tmp
@@ -62,7 +62,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install WSInfer-CLI
+      - name: Install SpinPath CLI
         run: |
           python -m pip install --upgrade pip setuptools wheel
           python -m pip install torch torchvision --extra-index-url https://download.pytorch.org/whl/cpu
@@ -75,7 +75,7 @@ jobs:
           wget -nc -q https://openslide.cs.cmu.edu/download/openslide-testdata/Aperio/CMU-1.svs
           cd -
       - name: Run tests
-        # Go to a different directory to test that WSInfer-MIL still finds everything it needs.
+        # Go to a different directory to test that SpinPath still finds everything it needs.
         # Test it twice so the second time we get cache hits.
         run: |
           cd /tmp
@@ -99,7 +99,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install WSInfer-CLI
+      - name: Install SpinPath CLI
         run: |
           python -m pip install --upgrade pip setuptools wheel
           python -m pip install torch torchvision --extra-index-url https://download.pytorch.org/whl/cpu
@@ -112,7 +112,7 @@ jobs:
           Invoke-WebRequest -URI https://openslide.cs.cmu.edu/download/openslide-testdata/Aperio/CMU-1.svs -OutFile CMU-1.svs
           cd -
       - name: Run tests
-        # Go to a different directory to test that WSInfer-MIL still finds everything it needs.
+        # Go to a different directory to test that SpinPath still finds everything it needs.
         # Test it twice so the second time we get cache hits.
         run: |
           mkdir -p ~/foobar
