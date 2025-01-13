@@ -16,7 +16,7 @@
 /scratch/
 
 # Generated version information
-wsinfer_mil/_version.py
+spinpath/_version.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
