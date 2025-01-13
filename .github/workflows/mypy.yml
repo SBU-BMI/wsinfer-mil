@@ -22,4 +22,4 @@ jobs:
           python -m pip install torch torchvision --extra-index-url https://download.pytorch.org/whl/cpu
           python -m pip install .[dev] mypy
       - name: Run mypy
-        run: python -m mypy --install-types --non-interactive wsinfer_mil
+        run: python -m mypy --install-types --non-interactive spinpath

@@ -42,8 +42,8 @@ jobs:
         # Test it twice so the second time we get cache hits.
         run: |
           cd /tmp
-          SPINPATH_FORCE_CPU=1 wsinfer-mil run -m kaczmarj/pancancer-tissue-classifier.tcga -i ~/wsi/CMU-1.svs
-          SPINPATH_FORCE_CPU=1 wsinfer-mil run -m kaczmarj/pancancer-tissue-classifier.tcga -i ~/wsi/CMU-1.svs
+          SPINPATH_FORCE_CPU=1 spinpath run -m kaczmarj/pancancer-tissue-classifier.tcga -i ~/wsi/CMU-1.svs
+          SPINPATH_FORCE_CPU=1 spinpath run -m kaczmarj/pancancer-tissue-classifier.tcga -i ~/wsi/CMU-1.svs
 
   macOS:
     runs-on: macos-latest
@@ -79,8 +79,8 @@ jobs:
         # Test it twice so the second time we get cache hits.
         run: |
           cd /tmp
-          SPINPATH_FORCE_CPU=1 wsinfer-mil run -m kaczmarj/pancancer-tissue-classifier.tcga -i ~/wsi/CMU-1.svs
-          SPINPATH_FORCE_CPU=1 wsinfer-mil run -m kaczmarj/pancancer-tissue-classifier.tcga -i ~/wsi/CMU-1.svs
+          SPINPATH_FORCE_CPU=1 spinpath run -m kaczmarj/pancancer-tissue-classifier.tcga -i ~/wsi/CMU-1.svs
+          SPINPATH_FORCE_CPU=1 spinpath run -m kaczmarj/pancancer-tissue-classifier.tcga -i ~/wsi/CMU-1.svs
 
   Windows:
     runs-on: windows-latest
@@ -118,5 +118,5 @@ jobs:
           mkdir -p ~/foobar
           cd ~/foobar
           set SPINPATH_FORCE_CPU=1
-          wsinfer-mil run -m kaczmarj/pancancer-tissue-classifier.tcga -i ~/wsi/CMU-1.svs
-          wsinfer-mil run -m kaczmarj/pancancer-tissue-classifier.tcga -i ~/wsi/CMU-1.svs
+          spinpath run -m kaczmarj/pancancer-tissue-classifier.tcga -i ~/wsi/CMU-1.svs
+          spinpath run -m kaczmarj/pancancer-tissue-classifier.tcga -i ~/wsi/CMU-1.svs
