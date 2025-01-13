@@ -9,7 +9,7 @@ from typing import Sequence
 
 import jsonschema
 
-from wsinfer_mil.errors import InvalidModelConfiguration
+from spinpath.errors import InvalidModelConfiguration
 
 
 @dataclasses.dataclass

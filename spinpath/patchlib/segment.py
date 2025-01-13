@@ -10,7 +10,7 @@ from skimage.morphology import binary_closing
 from skimage.morphology import remove_small_holes
 from skimage.morphology import remove_small_objects
 
-from wsinfer_mil.wsi_utils import get_avg_mpp
+from spinpath.wsi_utils import get_avg_mpp
 
 
 def _segment_tissue_from_array(

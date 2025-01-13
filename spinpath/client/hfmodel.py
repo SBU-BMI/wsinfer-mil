@@ -1,4 +1,4 @@
-"""API to interact with WSInfer MIL models on HuggingFace Hub."""
+"""API to interact with SpinPath models on HuggingFace Hub."""
 
 from __future__ import annotations
 
@@ -7,8 +7,8 @@ import json
 
 from huggingface_hub import hf_hub_download
 
-from wsinfer_mil.client.localmodel import Model
-from wsinfer_mil.client.localmodel import ModelConfiguration
+from spinpath.client.localmodel import Model
+from spinpath.client.localmodel import ModelConfiguration
 
 HF_CONFIG_NAME = "config.json"
 HF_TORCHSCRIPT_NAME = "torchscript_model.pt"

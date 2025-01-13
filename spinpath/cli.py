@@ -1,4 +1,4 @@
-"""Command line interface for WSInfer MIL."""
+"""Command line interface for SpinPath."""
 
 from __future__ import annotations
 
@@ -9,10 +9,10 @@ from pathlib import Path
 import click
 from PIL import Image
 
-from wsinfer_mil.client.hfmodel import load_torchscript_model_from_hf
-from wsinfer_mil.client.localmodel import Model
-from wsinfer_mil.client.localmodel import load_torchscript_model_from_filesystem
-from wsinfer_mil.inference import infer_one_slide
+from spinpath.client.hfmodel import load_torchscript_model_from_hf
+from spinpath.client.localmodel import Model
+from spinpath.client.localmodel import load_torchscript_model_from_filesystem
+from spinpath.inference import infer_one_slide
 
 logger = logging.getLogger(__name__)
 
