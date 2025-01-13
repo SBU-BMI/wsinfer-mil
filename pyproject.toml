@@ -59,6 +59,7 @@ dependencies = [
     # wsinfer-mil. See https://pytorch.org/get-started/locally/.
     "torch>=1.7",
     "torchvision",
+    "transformers",
     "tqdm",
 ]
 dynamic = ["version"]
